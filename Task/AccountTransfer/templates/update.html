@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Balance Transfer</title>
+        <link href="{% static 'vendor/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'vendor/select2/seletc2.min..css' %}" rel="stylesheet">
+        <!-- Link to Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <style>
+            .container {
+                max-width: 600px;
+            }
+
+            .select2-container--default .select2-selection--single {
+                height: 38px;
+                padding: 6px 12px;
+            }
+
+            /* Custom font for the heading */
+            .cust-font {
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .tm {
+                margin-top: 30px;
+                margin-bottom: 10px;
+            }
+
+            .errorlist {
+                color: red;
+                font-family: 'Roboto', sans-serif;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container shadow p-3 bg-body-tertiary rounded tm" style="height: 600px;">
+            <h1 class="cust-font mb-4 text-center tm">Transfer Balance</h1>
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="alert {% if 'success' in message.tags %}alert-success{% elif 'danger' in message.tags %}alert-danger{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="d-grid">
+                    <button type="submit" class="tm btn btn-primary rounded-pill py-2 " style="width: 100%;">Transfer Money</button>
+                </div>
+            </form>
+        </div>
+        <script src="{% static 'vendor/jquery/jquery-3.7.1.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#id_from_user').select2({});
+                $('#id_to_user').select2({});
+            });
+        </script>
+    </body>
+
+</html>

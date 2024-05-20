@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Account List</title>
+        <link href="{% static 'vendor/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+        <style>
+            /* Custom font for the heading */
+            .cust-font {
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .card {
+                margin-bottom: 20px;
+            }
+
+            .card-body {
+                display: flex;
+                align-items: center;
+            }
+
+            .card-body img {
+                width: 50px;
+                /* Adjust size as needed */
+                height: 50px;
+                /* Adjust size as needed */
+                margin-right: 15px;
+                border-radius: 50%;
+            }
+
+            .card-text {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .pagination .current {
+                font-weight: bold;
+                color: #007bff;
+                padding: 0.5rem;
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container mt-5">
+            <div class="row">
+                {% for obj in data %}
+                <div class="col-md-3">
+                    <div class="card shadow-lg bg-body-tertiary rounded">
+                        <div class="card-body">
+                            <img src="{% static 'vendor/images/User-Profile-PNG-High-Quality-Image.png' %}" alt="Profile Image">
+                            <div class="card-text">
+                                <h5 class="cust-font">{{ obj.name }}</h5>
+                                <h5 class="cust-font">{{ obj.balance }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                        {% endif %}
+                        <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+                        {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+                        {% endif %}
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    </body>
+
+</html>
