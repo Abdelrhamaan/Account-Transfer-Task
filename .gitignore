@@ -1,0 +1,8 @@
+# Ignore virtual environment directory
+.venv/
+
+# Ignore compiled Python files
+Task/*.pyc
+
+# Ignore migration files
+Task/**/migrations/
