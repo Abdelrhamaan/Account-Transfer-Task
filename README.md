@@ -31,18 +31,22 @@
 2. give execute permsion to entrypoint.sh
 
    ```bash
-      sudo chmod +x entrypoint.sh
+      sudo chmod +x Account-Transfer-Task/Task/entrypoint.sh
    ```
 
-3. build project with docker compose
+3. go inside project
+   ```bash
+       cd Account-Transfer-Task/Task/
+   ```
+4. build project with docker compose
    ```bash
        docker compose up --build
    ```
-4. run script to read data and save it in database
+5. run script to read data and save it in database
    ```bash
    docker exec dj_backend python manage.py runscript  script
    ```
-5. delete tests.py file in AccountTransfe file then run this command to see test cases
+6. delete tests.py file in AccountTransfe file then run this command to see test cases
    ```bash
     docker exec dj_backend python manage.py test AccountTransfer
    ```

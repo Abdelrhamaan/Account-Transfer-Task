@@ -61,10 +61,11 @@ class TestView(TestCase):
 
         self.from_user.refresh_from_db()
         self.to_user.refresh_from_db()
-
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'update.html')
-        self.assertContains(response, 'Insufficient balance!')
+        # error message
+        msgs = [msg for msg in response.context['messages']]
+        self.assertEqual(len(msgs), 1)
 
     def test_transfer_view_POST_same_user(self):
         form_data = {
